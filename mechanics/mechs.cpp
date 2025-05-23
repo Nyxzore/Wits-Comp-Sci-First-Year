@@ -32,12 +32,27 @@ namespace mechs {
     double dot(const double& magA, const double& magB, const double& theta){
         return magA*magB*cos(theta);
     }
+
+    vector<double> resultant(vector<vector<double>> vecs){
+        vector<double> resultant_vec;
+        double summed_components; 
+        
+        for (unsigned int component_indx=0; component_indx<vecs[0].size(); component_indx++){
+            summed_components = 0; 
+            for (unsigned int vector_indx=0; vector_indx<vecs.size(); vector_indx++){
+                summed_components += vecs[vector_indx][component_indx]; 
+            }
+            resultant_vec.push_back(summed_components);  
+        }
+        return resultant_vec;
+    } 
 }
 
-int main(){
-    cout << mechs :: magnitude({3.43,5.87,2.871}) << endl;
-    cout << mechs :: l2norm({3.43,5.87,2.871}) << endl;
-    cout << mechs :: dot({3.43,5.87,2.871}, {3.43,5.87,2.871}) << endl;
-    cout << mechs :: dot(32, 56, 1.43); 
+int main(){ 
+    vector<double> R; 
+    R = mechs :: resultant({{3.43,5.87,2.871}, {3.43,5.87,6.871}, {3.43,2.87,2.871}, {3.43,5.87,2.871}});
+    for (const double& component : R){
+        cout << component << ", ";
+    }
     return 0;
-}
+}`
